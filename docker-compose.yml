@@ -1,13 +1,13 @@
 version : '3.7'
-#networks:
-#  hy-net:
-#    external: true
+networks:
+  zabbix-net:
+    external: true
 services:
   zabbix-server:
         container_name : zabbix-server
         hostname: zabbixserver
         networks:
-          hy-net:
+          zabbix-net:
         image: registry.cn-hangzhou.aliyuncs.com/yangyuanpeng/zabbix:ubuntu-3.4.13-server-mysql
         volumes:
           - /etc/localtime:/etc/localtime:ro
@@ -25,8 +25,8 @@ services:
   zabbix-web:
         container_name : zabbix-web
         image: registry.cn-hangzhou.aliyuncs.com/yangyuanpeng/zabbix:ubuntu-3.4.13-web-nginx
-#        networks:
-#          hy-net:
+        networks:
+          zabbix-net:
         volumes:
           - /etc/localtime:/etc/localtime:ro
         ports :
